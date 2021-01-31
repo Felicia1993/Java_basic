@@ -1,6 +1,6 @@
 package com.linkedlist.demo.treeset;
 
-public class Item implements Comparable<Item>{
+public class Item {
     private String description;
     private int partNumber;
 
