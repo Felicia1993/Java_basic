@@ -8,6 +8,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class BlockingQueue {
     /**
+     * 阻塞队列是线程安全的
      * linkedBlockingQueue的容量没有上边界。但是可以指定最大容量
      * linkedBlockingDeque是双端版本
      * ArrayBlockingQueue构造时需要指定容量，并且有一个可选的参数来指定是否需要公平性。若设置了公平参数，那么等待最长时间的线程会优先得到处理
