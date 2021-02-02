@@ -1,45 +1,43 @@
 package com.thread.demo.juc;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.Callable;
+import java.util.concurrent.*;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.FutureTask;
 
-public class MatchCounter implements Callable<Integer> {
+public class MatchCounterMul implements Callable<Integer> {
     private File directory;
     private String keyword;
+    private ExecutorService pool;
+    private int count;
 
-    public MatchCounter(File directory, String keyword) {
+
+    public MatchCounterMul(File directory, String keyword, ExecutorService pool) {
         this.directory = directory;
         this.keyword = keyword;
+        this.pool = pool;
     }
 
     @Override
     public Integer call() throws Exception {
         int count = 0;
         File[] files = directory.listFiles();
-        List<FutureTask<Integer>> results = new ArrayList<>();
+        List<Future<Integer>> results = new ArrayList<>();
         for (File file : files) {
             if (file.isDirectory()) {
-                MatchCounter counter = new MatchCounter(file, keyword);
-                FutureTask<Integer> task = new FutureTask<>(counter);
-                results.add(task);
-                Thread thread = new Thread(task);
-                thread.start();
+                MatchCounterMul counterMul = new MatchCounterMul(file, keyword, pool);
+                java.util.concurrent.Future<Integer> submit = pool.submit(counterMul);
             } else {
                 if (search(file)) {
                     count++;
                 }
             }
         }
-        for (FutureTask<Integer> result : results) {
-            count = result.get();
+        for (Future<Integer> result : results) {
+            count += result.get();
         }
         return count;
     }

@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-public class Future {
+public class Future<I extends Number> {
     /**
      * Runnable封装一个异步运行的任务，没有参数和返回值的异步方法。Callable和Runnable类似，有返回值，Callable接口是一个参数化的类型，只有一个方法call
      * Future保存异步计算的结果，可以启动一个计算，将Future对象交给某个线程，然后忘掉它。Future对象的所有者在结果计算好之后就可以获得它
