@@ -6,10 +6,10 @@ package com.linkedlist.demo.design;
  * 缺点；导致类的个数增多，增加系统的复杂度
  */
 public class TemplatePattern {
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         Cooking cookingFood = new CookingFood();
         cookingFood.cook();
-    }
+    }*/
     abstract class Cooking{
         protected abstract void step1();
         protected abstract void step2();
@@ -21,7 +21,7 @@ public class TemplatePattern {
         }
     }
 
-    class CookingFood extends Cooking{
+    /*static class CookingFood extends Cooking{
 
         @Override
         protected void step1() {
@@ -32,5 +32,5 @@ public class TemplatePattern {
         protected void step2() {
             System.out.println("少放盐");
         }
-    }
+    }*/
 }
