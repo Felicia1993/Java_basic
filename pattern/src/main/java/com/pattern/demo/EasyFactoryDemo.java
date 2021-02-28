@@ -7,6 +7,13 @@ import java.text.DateFormat;
  * 被创建的实例通常都具有共同的父类
  */
 public class EasyFactoryDemo {
+    /**
+     * 优点：实现对象的创建和使用分离，创建完全交给专门的工厂负责
+     * 缺点：不够灵活
+     *
+     * @param type
+     * @return
+     */
     public static Product createProduct(String type) {
         if (type.equals("A")) {
             return new ProductA();
